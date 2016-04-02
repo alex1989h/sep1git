@@ -16,7 +16,7 @@ public class GameTest extends TestCase {
     assertEquals(8, game.move('O'));
 
     game = new Game("---------");
-    assertEquals(0, game.move('X'));
+    assertEquals(8, game.move('X'));
 
     game = new Game("XXXXXXXXX");
     assertEquals(-1, game.move('X'));
