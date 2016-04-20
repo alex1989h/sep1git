@@ -16,19 +16,16 @@ public class Game {
   }
 
   public int move(char player) {
+    int defaultMove = NoMove;
     for (int move = 0; move < 9; move++) {
-      if (board.charAt(move) == '-') {
+      if (feldIstLeer(move)){ 
+        defaultMove = move;
         Game game = play(move, player);
-        if (game.winner() == player)
-          return move;
+        if (game.winner() == player) 
+          defaultMove = move;
       }
     }
-
-    for (int move = 0; move < 9; move++) {
-      if (board.charAt(move) == '-')
-        return move;
-    }
-    return NoMove;
+    return defaultMove;
   }
 
   public Game play(int move, char player) {
