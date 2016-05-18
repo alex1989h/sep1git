@@ -36,7 +36,51 @@ public class FSMImplementation implements IFSM {
 	
 	@Override
 	public void evaluate() {
-		// TODO Auto-generated method stub
+		switch (state) {
+			case HumidityOkay:
+				System.out.println("Zustand: HumidityOkey");
+				if(sensor.getHumidity() < lowerBound){
+					signals.switchLampAOn();
+					state=FSMState.UnderHumidityMin;
+				}
+				if(sensor.getHumidity() > upperBound){
+					state=FSMState.OverHumidityMax;
+				}
+				break;
+			case UnderHumidityMin:
+				System.out.println("Zustand: UnderHumidityMin");
+				humidifier.sendSprayOn();
+				while(true){
+					sleep();
+					if(sensor.getHumidity()>=lowerBound){
+						humidifier.sendSprayOff();
+						signals.switchLampAOff();
+						state=FSMState.HumidityOkay;
+						break;
+					}
+				}
+				break;
+			case OverHumidityMax:
+				break;
+			case Pumpen:
+				break;
+			case Erfolg:
+				break;
+			case ERROR:
+				break;
+			case UnderHumidityMax:
+				break;
+			default:
+				break;
+			}
 	}
-
+	
+	private void sleep(){
+		try {
+			Thread.sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

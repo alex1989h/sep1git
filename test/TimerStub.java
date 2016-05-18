@@ -1,6 +1,6 @@
 package test;
 
-import fsm.ITimer;
+import boundaryclasses.ITimer;
 
 public class TimerStub implements ITimer {
 

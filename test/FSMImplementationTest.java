@@ -44,7 +44,14 @@ public class FSMImplementationTest {
 	
 	@Test
 	public void testPath() {
-
+		HumiditySensorStub.humidity=30;
+		uut.evaluate();
+		HumiditySensorStub.humidity=10;
+		uut.evaluate();
+		uut.evaluate();
+		HumiditySensorStub.humidity=10;
+		uut.evaluate();
+		uut.evaluate();
 	}
 
 }

@@ -3,16 +3,26 @@ package test;
 import boundaryclasses.IHumidifier;
 
 public class HumidifierStub implements IHumidifier {
-
+	
+	Spray spray;
+	
 	@Override
 	public void sendSprayOn() {
-		// TODO Auto-generated method stub
+		spray= new Spray();
+		spray.start();
+		System.out.println("Spray eingeschaltet");
 
 	}
 
 	@Override
 	public void sendSprayOff() {
-		// TODO Auto-generated method stub
+		spray.interrupt();
+		try {
+			spray.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+		}
+		System.out.println("Spray ausgeschaltet");
 
 	}
 
