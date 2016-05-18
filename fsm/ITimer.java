@@ -1,4 +1,4 @@
-package boundaryclasses;
+package fsm;
 /**
  * Interface for Timer to measure durations.
  * @author Thomas Lehmann
