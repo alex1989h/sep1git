@@ -6,8 +6,8 @@ public class ManualControlStub implements IManualControl {
 
 	@Override
 	public boolean receivedAcknowledgement() {
-		// TODO Auto-generated method stub
-		return false;
+		System.out.println("MANUELLE EINGABE ist erfolgt");
+		return true;
 	}
 
 }

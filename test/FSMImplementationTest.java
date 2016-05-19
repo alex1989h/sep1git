@@ -27,7 +27,9 @@ public class FSMImplementationTest {
 	private HumiditySensorStub sensor;
 	private HumidifierStub humidifier;
 	private ManualControlStub operatorPanel;
+	private TimerStub time;
 	private IFSM uut;
+	
 
 	@Before
 	public void testSetup(){
@@ -38,20 +40,20 @@ public class FSMImplementationTest {
 		sensor = new HumiditySensorStub();
 		humidifier = new HumidifierStub();
 		operatorPanel = new ManualControlStub();
+		time = new TimerStub();
 		uut = new FSMImplementation(  pumpA,  pumpB,  gate,  signals,
-				humidifier,  sensor,  operatorPanel) ;
+				humidifier,  sensor,  operatorPanel, time) ;
 	}
 	
 	@Test
 	public void testPath() {
-		HumiditySensorStub.humidity=30;
-		uut.evaluate();
-		HumiditySensorStub.humidity=10;
-		uut.evaluate();
-		uut.evaluate();
-		HumiditySensorStub.humidity=10;
-		uut.evaluate();
-		uut.evaluate();
+		int [] humidity = {19, 21, 61, 61, 61, 59, 59, 59};
+		time.startTime(6);
+		for (int i = 0; i < 8; i++){
+			HumiditySensorStub.humidity= humidity[i];
+			uut.evaluate();
+		}
+		
 	}
 
 }
